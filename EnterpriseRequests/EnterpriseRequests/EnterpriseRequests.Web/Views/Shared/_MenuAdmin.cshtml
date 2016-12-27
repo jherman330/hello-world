@@ -1,0 +1,21 @@
+﻿@using EnterpriseRequests.Web.Security
+@model string
+
+<li id="menuAdmin" class="dropdown">
+    @if (User.IsAdmin())
+    {
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+        <ul class="dropdown-menu hidden-print">
+            @*<li class="EntitiesAdminTray"><a href="@Url.Action("Index", "Entities")"><i class="fa fa-question-circle fa-fw"></i> Entities</a></li>*@
+        </ul>
+    }
+</li>
+
+<script>
+    var model = '@Html.Raw(Model)';
+
+    if (model !== "" && $("." + model).length) {
+        $("#menuAdmin").addClass("active");
+        var selectedView = $("." + model).addClass("active");
+    }
+</script>

@@ -1,0 +1,51 @@
+﻿@model EnterpriseRequests.Web.ViewModels.BaseActionLinksViewModel
+
+@if (Model.IsCreateVisible) 
+{
+    <li class="linkitem visible-lg visible-md">
+        <a href="@Url.Content("~/")@Model.Controller/Create" class="action-link"><i class="fa fa-plus fa-fw"></i> Create</a>
+    </li>
+    <li class="visible-sm visible-xs">
+        <a href="@Url.Content("~/")@Model.Controller/Create" class="action-link"><i class="fa fa-plus fa-fw"></i> Create</a>
+    </li>
+}
+
+@if (Model.IsDeleteVisible)
+{
+    <li class="linkitem visible-lg visible-md">
+        <a href="@Url.Content("~/")@Model.Controller/Delete/{id}" class="action-link"><i class="fa fa-trash fa-fw"></i> Delete</a>
+    </li>
+    <li class="visible-sm visible-xs">
+        <a href="@Url.Content("~/")@Model.Controller/Delete/{id}" class="action-link"><i class="fa fa-trash fa-fw"></i> Delete</a>
+    </li>
+}
+
+@if (Model.IsEditVisible)
+{
+    <li class="linkitem visible-lg visible-md">
+        <a href="@Url.Content("~/")@Model.Controller/Edit/{id}" class="action-link"><i class="fa fa-pencil-square-o fa-fw"></i> Edit</a>
+    </li>
+    <li class="visible-sm visible-xs">
+        <a href="@Url.Content("~/")@Model.Controller/Edit/{id}" class="action-link"><i class="fa fa-pencil-square-o fa-fw"></i> Edit</a>
+    </li>
+}
+
+@if (Model.IsDetailsVisible)
+{
+    <li class="linkitem visible-lg visible-md">
+        <a href="@Url.Content("~/")@Model.Controller/Details/{id}" class="action-link"><i class="fa fa-eye fa-fw"></i> View</a>
+    </li>
+    <li class="visible-sm visible-xs">
+        <a href="@Url.Content("~/")@Model.Controller/Details/{id}" class="action-link"><i class="fa fa-eye fa-fw"></i> View</a>
+    </li>
+}
+
+@foreach (var link in Model.CustomLinks) 
+{
+    <li class="linkitem visible-lg visible-md">
+        <a href="@Url.Content("~/")@link.Address" class="action-link"><i class="fa fa-@link.Icon fa-fw"></i> @link.Text</a>
+    </li>
+    <li class="visible-sm visible-xs">
+        <a href="@Url.Content("~/")@link.Address" class="action-link"><i class="fa fa-@link.Icon fa-fw"></i> @link.Text</a>
+    </li>
+}

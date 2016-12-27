@@ -1,0 +1,92 @@
+﻿@using System.Configuration
+@using System.Globalization
+@using EnterpriseRequests.Web.Security
+@using EnterpriseRequests.Web.Extensions
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="msapplication-config" content="none" />
+    <title>ProjectName @(ConfigurationManager.AppSettings["EnvironmentName"] != null ? ConfigurationManager.AppSettings["EnvironmentName"].ToString(CultureInfo.InvariantCulture) : "")</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/kendo/bundle")
+    @Styles.Render("~/Content/styles/bootstrap")
+    @Styles.Render("~/Content/styles/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body style="padding-top: 70px;">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand hidden-xs">
+                    <img src="~/Content/images/FirstEnergy_white_225x60.png" height="30" />
+                </div>
+                @Html.ActionLink("ProjectName", "Index", "Home", null, new { @class = "navbar-brand" })
+                @if (ConfigurationManager.AppSettings["EnvironmentName"] != null)
+                {
+                    <div class="navbar-brand" style="color: red">@ConfigurationManager.AppSettings["EnvironmentName"]</div>
+                }
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav visible-xs visible-sm hidden-print">
+                    @RenderSection("menuActions", false)
+                    @RenderSection("menuViews", false)
+                    @RenderSection("menuAdmin", false)
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <div class="navbar-brand hidden-xs"><a href="/Home/Index"><span class="glyphicon glyphicon-home"></span></a></div>
+                    </li>
+                    <li>
+                        <div class="navbar-brand visible-lg visible-md"><span class="glyphicon glyphicon-user" style="padding-right: 10px;"></span>@User.Employee().DisplayName</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="data-container" class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 sidebar visible-lg visible-md hidden-print">
+                @RenderSection("sidebarActions", false)
+                @RenderSection("sidebarViews", false)
+                @RenderSection("sidebarAdmin", false)
+            </div>
+            <div class="col-md-10 col-md-offset-2">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - FirstEnergy</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    @Html.Hidden("toastr_errorMessage", TempData.GetErrorMessage())
+    @Html.Hidden("toastr_successMessage", TempData.GetSuccessMessage())
+    @Html.Hidden("toastr_infoMessage", TempData.GetInfoMessage())
+
+    @Scripts.Render("~/bundles/bootstrapScripts")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/knockoutScripts")
+    @Scripts.Render("~/bundles/miscScripts")
+    @Scripts.Render("~/bundles/appScripts")
+    
+    <script>
+        var defaults = {
+            empBaseAPI: "@ConfigurationManager.AppSettings["EmployeeLookupURL"]"
+        };
+    </script>
+
+    @RenderSection("scripts", false)
+</body>
+</html>

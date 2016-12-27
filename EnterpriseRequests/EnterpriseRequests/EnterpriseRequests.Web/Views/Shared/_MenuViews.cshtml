@@ -1,0 +1,17 @@
+﻿@model string
+
+<li id="menuViews" class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Views <b class="caret"></b></a>
+    <ul class="dropdown-menu hidden-print">
+    @*<li class="EntitiesViewTray"><a href="@Url.Action("Index", "Entities")"><i class="fa fa-ticket fa-fw"></i>  Requests</a></li>*@
+    </ul>
+</li>
+
+<script>
+    var model = '@Html.Raw(Model)';
+
+    if (model !== "" && ("." + model).length) {
+        $("menuViews").addClass("active");
+        var selectedView = $("." + model).addClass("active");
+    }
+</script>

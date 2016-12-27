@@ -1,0 +1,47 @@
+﻿@using EnterpriseRequests.Web.Security
+
+@{
+    ViewBag.Title = "Error";
+}
+
+@section menuViews
+{
+    @Html.Partial("_MenuViews", "")
+}
+
+@section sidebarViews
+{
+    @Html.Partial("_SidebarViews", "")
+}
+
+@if (User.IsAdmin())
+{
+    @section menuAdmin
+    {
+        @Html.Partial("_MenuAdmin", "")
+    }
+
+    @section sidebarAdmin
+    {
+        @Html.Partial("_SidebarAdmin", "")
+    }
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <h2><span class="glyphicon glyphicon-warning-sign" style="margin-right: 1em;"></span>Whoops! An Error Has Occured.</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <h2><small>Unfortunately we were unable to process your request.</small></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

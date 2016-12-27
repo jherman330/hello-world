@@ -1,0 +1,13 @@
+﻿@model string
+
+<ul class="nav nav-stacked hidden-print">
+    <li class="navheader">Views</li>
+    @*<li class="linkitem Entities"><a href="@Url.Action("Index", "Entities")"><i class="fa fa-ticket fa-fw"></i> Entities</a></li>*@
+</ul>
+
+<script>
+    var model = '@Html.Raw(Model)';
+    if (model !== "") {
+        var selectedView = $('.' + model).addClass('current');
+    }
+</script>
